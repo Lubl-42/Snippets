@@ -9,15 +9,16 @@
 
         <div class="row">
             <div class="col">
-                <p>На данной странице  отображаются все комментарии.
-                    Всего {{ count }} комментариев </p>
+                <p>На данной странице  отображаются все члены СНТ САДОВОД.
+                    Всего {{ users.count }} членов СНТ САДОВОД   </p>
+
                 <hr>
             </div>
         </div>
 {% if request.user.is_authenticated %}
 <h1>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container">
+        <div-- class="container">
 
             <a class="navbar-brand" href="{% url 'home' %}">
                 <img src="{% static 'images/Flower.png' %}" width="32" height="32" alt="">
@@ -30,16 +31,16 @@
             </button>
 
 
-            <div class="collapse navbar-collapse" id="navbarCollapse">
+            <!--div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="form-inline"><a class="btn btn-outline-secondary" href="{% url 'list_snippet' %}">Все
-                        комментарии</a></li>
+                        комментарии</a></li-->
                     <!--li class="form-inline"><a class="btn btn-outline-info" href="{% url 'list_snippet_privat' %}">
                         Только публичные сниппеты</a></li-->
-                    <li class="form-inline"><a class="btn btn-outline-info" href="{% url 'list_snippet_my' %}">
+                    <!--li class="form-inline"><a class="btn btn-outline-info" href="{% url 'list_snippet_my' %}">
                         Только Мои комментарии</a></li>
                 </ul>
-            </div>
+            </div-->
 
         </div>
         </nav>
@@ -50,22 +51,28 @@
               <thead class="thead-dark">
               <tr>
                   <th scope="col">Номер</th>
-                  <th scope="col">Заголовок </th>
-                  <th scope="col">   </th>
-                  <th scope="col"> Дата Создания:</th>
-                  <th scope="col"> Автор : </th>
+                  <th scope="col">Имя пользователя </th>
+                  <th scope="col">Посмотреть счет </th>
+                  <th scope="col">Начислить задолженность </th>
+                  <th scope="col">Зафиксировать оплату </th>
+
+                  <th scope="col"> Фамилия владельца</th>
+                  <th scope="col"> Контактные данные : </th>
                   <!--th scope="col"> Public </th-->
               </tr>
               </thead>
             <tbody>
-            {% for snippet in snippets %}
+            {% for user in users %}
             <tr>
-                <td scope="row">{{snippet.id}}  </td>
-                <td scope="row"> {{snippet.name}}</td>
-                <td> <a href="{% url 'view_one_snippet' id=snippet.id %}"> Посмотреть </a> </td>
-                <td> {{snippet.creation_date|date:"d M Y" }}  </td>
+                <td scope="row">{{user.id}}  </td>
+                <td scope="row"> {{user.username}}  </td>
+                <td scope="row"> <a href="{% url 'view_account' id=user.id  %}"> Посмотреть счет </a> </td>
+                <td scope="row"> <a href="{% url 'view_account' id=user.id  %}"> Начислить </a> </td>
+                <td scope="row"> <a href="{% url 'view_account' id=user.id  %}"> Оплата </a> </td>
 
-                <td> {{snippet.user|default:'АНОНИМНО'}} </td>
+                <td> {{user.first_name }}  </td>
+
+                <td> {{user.last_name|default:' Анонимно'}} </td>
                 <!--td> {{ snippet.visible }}</td-->
             </tr>
             {% endfor %}
@@ -75,34 +82,19 @@
 
     <div class='pagination'>
         <span class="step-links">
-            {% if snippets.has_previous %}
-            <a href="?page={{snippets.previous_page_number}}">Prev</a>
+            {% if users.has_previous %}
+            <a href="?page={{users.previous_page_number}}">Prev</a>
             {% endif %}
             <span class="current">
-                Page {{snippets.number}} of {{snippets.paginator.num_pages }}.
+                Page {{users.number}} of {{users.paginator.num_pages }}.
             </span>
-            {% if snippets.has_next %}
-                <a href="?page={{snippets.next_page_number }} "> next</a>
+            {% if users.has_next %}
+                <a href="?page={{users.next_page_number }} "> next</a>
             {% endif %}
         </span>
     </div>
 
-        <!--div class="row">
-            <div class="col-4 offset-2">
-                Список сниппетов:
-                <ul>
-                    {% for snippet in snippets %}
 
-
-                <li> {{ snippet.name  }} .. {{ snippet.id  }} </li>
-
-                    {% endfor %}
-                </ul>
-            </div>
-        </div-->
-
-    <!--/div-->
-<!--/main-->
 
                 {% endblock %}
 

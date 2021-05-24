@@ -9,13 +9,13 @@
                     <!--{{ form.as_p }}-->
                     <div class="form-group row">
                         <div class="col-sm-8">
-                            {{ form.name}}
+                            {{ form.username}}
                             <!--input name='name' type="text" class="form-control form-control-lg" placeholder="Название сниппета"-->
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-8">
-                            {{ form.lang }}
+                            {{ form.email }}
                              <!--input name='lang' type="text" class="form-control form-control-lg" placeholder="Язык программирования "-->
                             <!--div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -32,8 +32,8 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-8">
-                            <h3> Публикация заметки </h3>
-                            {{ form.visible }}
+
+                            {{ form.password }}
                              <!--input name='lang' type="text" class="form-control form-control-lg" placeholder="Язык программирования "-->
                             <!--div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -48,16 +48,12 @@
                             </div-->
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col">
-                            {{ form.code }}
-                            <!--textarea name='code' cols="96" rows="10" placeholder="Код сниппета"></textarea-->
-                        </div>
-                    </div>
+
 
                     <div class="form-group row">
                         <div class="col-8">
-                            <input type="submit" class="btn btn-primary btn-block" value={{button|default:"Сохранить"}}>
+                            <input type="submit" class="btn btn-primary btn-block"
+                                   value={{button|default:"Сохранить"}}>
                         </div>
                     </div>
                 </form>

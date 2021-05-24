@@ -9,13 +9,13 @@
                     <!--{{ form.as_p }}-->
                     <div class="form-group row">
                         <div class="col-sm-8">
-                            {{ form.name}}
+                            Участок {{ user.id}} Садовод {{ user.name}} Фамилия {{user.first_name}}
                             <!--input name='name' type="text" class="form-control form-control-lg" placeholder="Название сниппета"-->
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-8">
-                            {{ form.lang }}
+                            Предыдущее показание {{ el_old }}
                              <!--input name='lang' type="text" class="form-control form-control-lg" placeholder="Язык программирования "-->
                             <!--div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -32,8 +32,8 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-8">
-                            <h3> Публикация заметки </h3>
-                            {{ form.visible }}
+                            <h3> новое показание счетчика </h3>
+                            {{ form.el_acc }}
                              <!--input name='lang' type="text" class="form-control form-control-lg" placeholder="Язык программирования "-->
                             <!--div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -50,7 +50,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col">
-                            {{ form.code }}
+                            {{ form.comment }}
                             <!--textarea name='code' cols="96" rows="10" placeholder="Код сниппета"></textarea-->
                         </div>
                     </div>

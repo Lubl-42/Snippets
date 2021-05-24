@@ -9,8 +9,8 @@
 
         <div class="row">
             <div class="col">
-                <p>На данной странице  отображаются все комментарии.
-                    Всего {{ count }} комментариев </p>
+                <p>На данной странице  отображаются все созданные комментарии.
+                    Всего {{ comments.count }} комментариев</p>
                 <hr>
             </div>
         </div>
@@ -20,26 +20,26 @@
         <div class="container">
 
             <a class="navbar-brand" href="{% url 'home' %}">
-                <img src="{% static 'images/Flower.png' %}" width="32" height="32" alt="">
-                СНТ САДОВОД БАРЫБИНО
+                <img src="{% static 'images/logo.png' %}" width="32" height="32" alt="">
+                PythonEverythere
             </a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            <!--button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-            </button>
+            </button-->
 
 
-            <div class="collapse navbar-collapse" id="navbarCollapse">
+            <!--div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="form-inline"><a class="btn btn-outline-secondary" href="{% url 'list_snippet' %}">Все
-                        комментарии</a></li>
-                    <!--li class="form-inline"><a class="btn btn-outline-info" href="{% url 'list_snippet_privat' %}">
-                        Только публичные сниппеты</a></li-->
+                        сниппеты</a></li>
+                    <li class="form-inline"><a class="btn btn-outline-info" href="{% url 'list_snippet_privat' %}">
+                        Только публичные сниппеты</a></li>
                     <li class="form-inline"><a class="btn btn-outline-info" href="{% url 'list_snippet_my' %}">
-                        Только Мои комментарии</a></li>
+                        Только Мои сниппеты</a></li>
                 </ul>
-            </div>
+            </div-->
 
         </div>
         </nav>
@@ -49,24 +49,26 @@
         <table class = 'table table-striped'>
               <thead class="thead-dark">
               <tr>
-                  <th scope="col">Номер</th>
-                  <th scope="col">Заголовок </th>
+                  <th scope="col">ID</th>
+                  <th scope="col">Author:</th>
                   <th scope="col">   </th>
-                  <th scope="col"> Дата Создания:</th>
-                  <th scope="col"> Автор : </th>
-                  <!--th scope="col"> Public </th-->
+                  <th scope="col"> Snippet name: </th>
+                  <th scope="col"> Creation date:</th>
+
+                  <th scope="col"> Text </th>
               </tr>
               </thead>
             <tbody>
-            {% for snippet in snippets %}
+            {% for comment in comments %}
             <tr>
-                <td scope="row">{{snippet.id}}  </td>
-                <td scope="row"> {{snippet.name}}</td>
-                <td> <a href="{% url 'view_one_snippet' id=snippet.id %}"> Посмотреть </a> </td>
-                <td> {{snippet.creation_date|date:"d M Y" }}  </td>
+                <td scope="row">{{comment.id}}  </td>
+                <td scope="row"> {{comment.author.username|default:'Anonimous'}}</td>
+                <td> <a href="{% url 'comment_delete' id=comment.id %}"> Удалить </a> </td>
+                <td> {{comment.snippet.name }}  </td>
+                <td> {{comment.creation_date|date:"d M Y" }}  </td>
 
-                <td> {{snippet.user|default:'АНОНИМНО'}} </td>
-                <!--td> {{ snippet.visible }}</td-->
+
+                <td> {{ comment.text }}</td>
             </tr>
             {% endfor %}
 
@@ -75,14 +77,14 @@
 
     <div class='pagination'>
         <span class="step-links">
-            {% if snippets.has_previous %}
-            <a href="?page={{snippets.previous_page_number}}">Prev</a>
+            {% if comments.has_previous %}
+            <a href="?page={{comments.previous_page_number}}">Prev</a>
             {% endif %}
             <span class="current">
-                Page {{snippets.number}} of {{snippets.paginator.num_pages }}.
+                Page {{comments.number}} of {{comments.paginator.num_pages }}.
             </span>
-            {% if snippets.has_next %}
-                <a href="?page={{snippets.next_page_number }} "> next</a>
+            {% if comments.has_next %}
+                <a href="?page={{comments.next_page_number }} "> next</a>
             {% endif %}
         </span>
     </div>
